@@ -30,7 +30,7 @@ class CityViewSet(generics.ListAPIView): #Берём всю коллекцию �
     queryset = City.objects.all()
     serializer_class = CitySerializer
 
-    def handle(self, ex):
+    def handle_exception(self, ex):
         return Response({'data': 'Коллекция пуста'}, status=400)
 
 
@@ -38,14 +38,14 @@ class CityDetail(generics.RetrieveAPIView): #Берём один объект и
     queryset = City.objects.all()
     serializer_class = CitySerializer
 
-    def handle(self, ex):
+    def handle_exception(self, ex):
         return Response({'data': 'Нету такого города с указанным city_id'}, status=400)
 
 
 class CityCreateView(generics.CreateAPIView): #Создаём новый объект
     serializer_class = CitySerializer
     
-    def handle(self, ex):
+    def handle_exception(self, ex):
         return Response({'data': 'Добавьте город'}, status=400)
     
 
@@ -63,14 +63,14 @@ class StreetViewset(generics.ListAPIView):
 class StreetCreateView(generics.CreateAPIView):
     serializer_class = StreetSerializer
 
-    def handle(self, ex):
+    def handle_exception(self, ex):
         return Response({'data': 'Добавьте улицу'}, status=400)
 
 
 class MarketCreateView(generics.CreateAPIView):
     serializer_class = MarketSerializer
 
-    def handle(self, ex):
+    def handle_exception(self, ex):
         return Response({'data': 'Добавьте магазин'}, status=400)
     
 

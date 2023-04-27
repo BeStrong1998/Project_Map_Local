@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -23,8 +24,8 @@ class Market(models.Model):
     street = models.ForeignKey(Street, on_delete=models.CASCADE)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     house = models.IntegerField(default=0)
-    time_opening = models.DateTimeField()
-    time_closeding = models.DateTimeField()
+    time_opening = models.DateTimeField(default=timezone.now)
+    time_closeding = models.DateTimeField(default=timezone.now)
 
     def __repr__(self):
         return self.name
