@@ -26,6 +26,8 @@ class Market(models.Model):
     house = models.IntegerField(default=0)
     time_opening = models.DateTimeField(default=timezone.now)
     time_closeding = models.DateTimeField(default=timezone.now)
+    # time_opening = models.TimeField(blank=timezone.now)
+    # time_closeding = models.TimeField(blank=timezone.now)
 
     def __repr__(self):
         return self.name
