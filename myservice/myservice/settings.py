@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-2o9f29h0pb%g(8jh3rs0yd63sll#(qe!vo9nl-bj)k@!3c-n1a'
+SECRET_KEY = 'django-insecure-k%n!^jup@)u)(8f!%8cyg$szl&1%crkm1@6#%2+=8i11wi+gfg'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -31,7 +31,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'maplocal.apps.MaplocalConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'rest_framework',
+    'maplocal'
 ]
 
 MIDDLEWARE = [
@@ -83,7 +83,7 @@ DATABASES = {
         'USER': 'postgres',
         'PASSWORD': 'BeStrong_1998',
         'HOST': 'localhost',
-        'PORT': '5432'
+        'PORT': '5432',
     }
 }
 
@@ -112,17 +112,18 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'Europe/Moscow' #'UTC' 
+TIME_ZONE = 'Europe/Moscow'     # 'UTC'
 
 USE_I18N = True
 
-USE_TZ = False
+USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-STATIC_URL = 'static/'
+# STATIC_URL = 'static/'
+STATIC_URL = "/staticfiles/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
