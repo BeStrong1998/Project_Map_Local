@@ -21,8 +21,6 @@ class Market(models.Model):
     street = models.ForeignKey(Street, on_delete=models.CASCADE)
     city = models.ForeignKey(City, on_delete=models.CASCADE)
     house = models.IntegerField(default=0)
-    # time_opening = models.DateTimeField()
-    # time_closeding = models.DateTimeField()
     time_opening = models.TimeField()
     time_closeding = models.TimeField()
 

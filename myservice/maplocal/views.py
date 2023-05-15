@@ -1,3 +1,4 @@
+from datetime import datetime
 from rest_framework import viewsets
 from .serializers import CitySerializer, StreetSerializer, MarketSerializer
 from .models import City, Street, Market
@@ -31,3 +32,18 @@ class GetStreetsViewSet(viewsets.ModelViewSet):     # колекция улиц
 class MarketsViewSet(viewsets.ModelViewSet):        # колекция магазинов
     queryset = Market.objects.all()
     serializer_class = MarketSerializer
+
+    @action(detail=True, methods=['get'])
+    def get_queryset(self):
+        # print(self.request.query_params)
+        queryset = Market.objects.all()
+        city_name = self.request.query_params.get('city')
+        if city_name is not None:
+            queryset = queryset.filter(city_name=city_name)
+
+        street_name = self.request.query_params.get('street')
+        if street_name is not None:
+            queryset = queryset.filter(street_name=street_name)
+
+
+        return queryset

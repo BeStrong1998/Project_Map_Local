@@ -15,5 +15,8 @@ urlpatterns = [
 
     path('city/<int:pk>/', CitysViewSet.as_view({'get': 'retrieve'})),
     path('city/<int:city_id>/street/', GetStreetsViewSet.as_view({'get': 'list'})),
-    path('market/', MarketsViewSet.as_view({'post': 'update'})),
+    path('market/street=city/', MarketsViewSet.as_view({'get': 'list'})),
 ]
+
+
+# path('market/', MarketsViewSet.as_view({'post': 'update'})),
