@@ -4,6 +4,9 @@ from .serializers import CitySerializer, StreetSerializer, MarketSerializer
 from .models import City, Street, Market
 # from rest_framework.response import Response
 from rest_framework.decorators import action
+from functools import reduce
+from django.db.models import Q
+from django.http import HttpResponse
 
 
 class CitysViewSet(viewsets.ModelViewSet):          # колекция городов
@@ -35,15 +38,25 @@ class MarketsViewSet(viewsets.ModelViewSet):        # колекция мага�
 
     @action(detail=True, methods=['get'])
     def get_queryset(self):
-        # print(self.request.query_params)
+        print(self.request.query_params)
         queryset = Market.objects.all()
-        city_name = self.request.query_params.get('city')
+        # queryset = Market.objects.filter()
+        city_name = self.request.query_params.get('city', None)
         if city_name is not None:
-            queryset = queryset.filter(city_name=city_name)
+            queryset = queryset.filter(city=city_name)
 
-        street_name = self.request.query_params.get('street')
+        street_name = self.request.query_params.get('street', None)
         if street_name is not None:
-            queryset = queryset.filter(street_name=street_name)
+            queryset = queryset.filter(street=street_name)
 
+        open = self.request.query_params.get('open', None)
+        if open is not None:
+            tim = datetime.now().time().hour
+            open_market = queryset.filter(time_opening__hour__lte=tim).filter(
+                time_closeding__hour__gte=tim)
+            if open == '1':
+                queryset = open_market
+            elif open == '0':
+                queryset = queryset.exclude(id__in=open_market) # исключаем результат из open_market
 
         return queryset
